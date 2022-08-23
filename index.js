@@ -1,25 +1,10 @@
-const authRoutes = require("./routes/auth.js");
 const express = require("express");
-const ejs = require("ejs");
-const path = require("path");
 const cors = require("cors");
-require("dotenv").config();
-const routes = require("./routes/feed");
+
+const authRoutes = require("./routes/auth.js");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-app.use(express.static(__dirname + "/public"));
-app.set("views", path.join(__dirname, "views"));
-
-//set view engine
-app.set("view engine", "ejs");
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-
-app.use(routes);
-
-// const PORT = process.env.PORT || 5000;
 
 require("dotenv").config();
 
@@ -27,6 +12,14 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
 const twilioClient = require("twilio")(accountSid, authToken);
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded());
+
+// const PORT = process.env.PORT || 5000;
+
+require("dotenv").config();
 
 let streamKey = process.env.REACT_APP_STREAM_API_KEY;
 let streamSecret = process.env.REACT_APP_STREAM_API_SECRET;
