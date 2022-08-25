@@ -12,7 +12,7 @@ app.set("views", path.join(__dirname, "views"));
 
 require("dotenv").config();
 
-// app.use(cors());
+app.use(cors());
 app.use(
   cors({
     origin: "*",
