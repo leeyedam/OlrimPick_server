@@ -24,6 +24,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.use((req, res) => {
+  // res.header("Access-Control-Allow-Origin", "*"); // 모든 도메인 허용
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // 특정 도메인 허용
+});
+
 app.use(express.json());
 app.use(express.urlencoded());
 
