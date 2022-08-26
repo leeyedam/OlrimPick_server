@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "getstream": "^7.2.10",
     "getstream-node": "^2.0.0",
+    "http-proxy-middleware": "^2.0.6",
     "nodemon": "^2.0.12",
     "stream-chat": "^4.1.0"
   },

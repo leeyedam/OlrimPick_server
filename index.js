@@ -1,8 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-
 const authRoutes = require("./routes/auth.js");
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,9 +10,19 @@ const PORT = process.env.PORT || 5000;
 app.use(express.static(__dirname + "/public"));
 app.set("views", path.join(__dirname, "views"));
 
-require("dotenv").config();
-
-app.use(cors());
+// app.use(cors());
+const whitelist = ["http://localhost:3000"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded());
